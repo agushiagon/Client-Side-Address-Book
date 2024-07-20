@@ -2,13 +2,15 @@
   "name": "Client-Side-Address-Book",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"vite\" \"json-server --watch mock-api/db.json --port 3001\"",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --fix --ignore-path .gitignore"
+    "lint": "eslint . --fix --ignore-path .gitignore",
+    "json-server": "json-server --watch db.json --port 3001"
   },
   "dependencies": {
     "@mdi/font": "7.4.47",
+    "axios": "^1.7.2",
     "core-js": "^3.37.1",
     "country-list": "^2.3.0",
     "roboto-fontface": "*",
@@ -17,10 +19,12 @@
   },
   "devDependencies": {
     "@babel/types": "^7.24.7",
+    "@types/axios": "^0.14.0",
     "@types/country-list": "^2.1.4",
     "@types/node": "^20.14.10",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-typescript": "^13.0.0",
+    "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-config-vuetify": "^1.0.0",
@@ -29,6 +33,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.4.0",
     "eslint-plugin-vue": "^9.27.0",
+    "json-server": "^1.0.0-beta.1",
     "pinia": "^2.1.7",
     "sass": "1.77.6",
     "typescript": "^5.4.2",

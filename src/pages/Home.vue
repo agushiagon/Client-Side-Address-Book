@@ -82,8 +82,9 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { onMounted, ref } from 'vue'
   import { Contact } from '@/types/index'
+  import { fetchData } from '@/api/index'
 
   const headers = [
     { title: 'First Name', value: 'firstName' },
@@ -92,12 +93,13 @@
     { title: 'Country', value: 'country' },
   ]
 
-  const contacts = ref<Contact[]>([
-    { firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', country: 'USA' },
-    { firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', country: 'Canada' },
-  ])
+  const contacts = ref<Contact[]>([])
 
   const search = ref<string>('')
+
+  onMounted(async () => {
+    await fetchData()
+  })
 
 </script>
 
