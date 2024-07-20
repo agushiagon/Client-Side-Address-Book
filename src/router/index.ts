@@ -11,6 +11,22 @@ const router = createRouter({
         pageTitle: 'Home',
       },
     },
+    {
+      path: '/add-contact',
+      name: 'add-contact-view',
+      component: () => import('@/pages/ContactForm.vue'),
+      meta: {
+        pageTitle: 'Add Contact',
+      },
+    },
+    {
+      path: '/edit-contact/:id',
+      name: 'hadd-contact-view',
+      component: () => import('@/pages/ContactForm.vue'),
+      meta: {
+        pageTitle: 'Edit Contact',
+      },
+    },
     { path: '/', redirect: '/home' },
   ],
 })

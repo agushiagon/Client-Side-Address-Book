@@ -1,10 +1,11 @@
 <template>
   <v-container fluid>
-    <v-card class="pa-8">
+    <v-card class="px-8 pb-8" title="Contacts List">
       <v-row>
         <v-col>
           <v-text-field
             v-model="search"
+            density="compact"
             hide-details
             label="Search"
             max-width="300"
@@ -14,7 +15,7 @@
         </v-col>
         <v-spacer />
         <v-col class="d-flex align-center justify-end">
-          <v-btn>
+          <v-btn :to="{name: 'add-contact-view'}">
             Add New Contact
           </v-btn>
         </v-col>
