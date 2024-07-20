@@ -83,13 +83,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue'
-
-  interface Contact {
-    firstName: string;
-    lastName: string;
-    email: string;
-    country: string;
-  }
+  import { Contact } from '@/types/index'
 
   const headers = [
     { title: 'First Name', value: 'firstName' },

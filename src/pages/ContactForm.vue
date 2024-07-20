@@ -43,13 +43,7 @@
   import { computed, onMounted, ref } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import CountryList from 'country-list'
-
-  interface Contact {
-    firstName: string;
-    lastName: string;
-    email: string;
-    country: string;
-  }
+  import { Contact } from '@/types/index'
 
   const route = useRoute()
   const router = useRouter()
