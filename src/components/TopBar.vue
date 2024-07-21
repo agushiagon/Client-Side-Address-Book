@@ -32,7 +32,7 @@
   import { BreadcrumbItem } from '@/types/index'
   const route = useRoute()
 
-  const breadcrumbs = computed<BreadcrumbItem[]>(() => {
+  const breadcrumbs = computed(() => {
     return route.meta.breadcrumbs as BreadcrumbItem[]
   })
 </script>
