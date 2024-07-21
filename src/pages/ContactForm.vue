@@ -53,6 +53,16 @@
                 >
                   {{ isEditMode ? "Update Contact" : "Add Contact" }}
                 </v-btn>
+                <v-btn
+                  v-if="isEditMode"
+                  class="ml-2"
+                  color="red"
+                  :disabled="isLoading"
+                  :loading="isLoading"
+                  @click="deleteContact()"
+                >
+                  Delete Contact
+                </v-btn>
               </div>
             </v-form>
           </template>
@@ -68,7 +78,12 @@
   import CountryList from 'country-list'
   import { Contact } from '@/types/index'
   import { useToast } from 'vue-toastification'
-  import { addNewContact, getContactById } from '@/api/index'
+  import {
+    addNewContact,
+    deleteContactById,
+    getContactById,
+    updateContact,
+  } from '@/api/index'
   import { VForm } from 'vuetify/components'
 
   const route = useRoute()
@@ -122,7 +137,7 @@
       if (isValid) {
         try {
           if (isEditMode.value) {
-            await updateContact()
+            await updateContactData()
           } else {
             await addContact()
           }
@@ -142,8 +157,21 @@
     router.push('/contact-list')
   }
 
-  const updateContact = async () => {
-    console.log('update')
+  const updateContactData = async () => {
+    await updateContact(route.params.id as string, contact.value)
+    toast.success('Contact updated successfully')
     router.push('/contact-list')
+  }
+
+  const deleteContact = async () => {
+    isLoading.value = true
+    try {
+      await deleteContactById(route.params.id as string)
+      toast.success('Contact deleted successfully')
+      router.push('/contact-list')
+    } catch (error) {
+      toast.error('Failed to delete contact')
+    }
+    isLoading.value = false
   }
 </script>
