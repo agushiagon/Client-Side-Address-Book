@@ -2,41 +2,60 @@
   <v-container fluid>
     <v-row align="center" justify="center">
       <v-col cols="12" lg="5" md="8">
-        <v-card class="px-8 pb-8" max-width="100%" :title="`${isEditMode ? 'Edit':'New'} Contact`">
-          <v-form ref="formRef" @submit.prevent="submitForm">
-            <v-text-field
-              v-model="contact.firstName"
-              class="mb-2"
-              label="First Name"
-              :rules="[requiredRule]"
-            />
-            <v-text-field
-              v-model="contact.lastName"
-              class="mb-2"
-              label="Last Name"
-              :rules="[requiredRule]"
-            />
-            <v-text-field
-              v-model="contact.email"
-              class="mb-2"
-              label="Email"
-              :rules="[requiredRule, emailRule]"
-              type="text"
-            />
-            <v-select
-              v-model="contact.country"
-              class="mb-2"
-              clearable
-              :items="countries"
-              label="Country"
-              :rules="[requiredRule]"
-            />
-            <div class="d-flex justify-end">
-              <v-btn color="primary" :disabled="isLoading" :loading="isLoading" type="submit">
-                {{ isEditMode ? 'Update Contact' : 'Add Contact' }}
-              </v-btn>
-            </div>
-          </v-form>
+        <v-card
+          class="px-8 pb-8"
+          :disabled="isLoading"
+          max-width="100%"
+          :title="`${isEditMode ? 'Edit' : 'New'} Contact`"
+        >
+          <template v-if="fatchingData">
+            <v-skeleton-loader type="heading" />
+            <v-skeleton-loader type="heading" />
+            <v-skeleton-loader type="heading" />
+            <v-skeleton-loader type="heading" />
+            <v-skeleton-loader type="actions" />
+          </template>
+          <template v-else>
+            <v-form ref="formRef" @submit.prevent="submitForm">
+              <v-text-field
+                v-model="contact.firstName"
+                class="mb-2"
+                label="First Name"
+                :rules="[requiredRule]"
+              />
+              <v-text-field
+                v-model="contact.lastName"
+                class="mb-2"
+                label="Last Name"
+                :rules="[requiredRule]"
+              />
+              <v-text-field
+                v-model="contact.email"
+                class="mb-2"
+                label="Email"
+                :rules="[requiredRule, emailRule]"
+                type="text"
+              />
+              <v-select
+                v-model="contact.country"
+                class="mb-2"
+                clearable
+                :items="countries"
+                label="Country"
+                :rules="[requiredRule]"
+              />
+              <div class="d-flex justify-end">
+                <v-btn
+                  color="primary"
+                  :disabled="isLoading"
+                  :loading="isLoading"
+                  type="submit"
+                >
+                  {{ isEditMode ? "Update Contact" : "Add Contact" }}
+                </v-btn>
+              </div>
+            </v-form>
+          </template>
         </v-card>
       </v-col>
     </v-row>
@@ -49,7 +68,7 @@
   import CountryList from 'country-list'
   import { Contact } from '@/types/index'
   import { useToast } from 'vue-toastification'
-  import { addNewContact } from '@/api/index'
+  import { addNewContact, getContactById } from '@/api/index'
   import { VForm } from 'vuetify/components'
 
   const route = useRoute()
@@ -66,6 +85,7 @@
 
   const isEditMode = computed(() => !!route.params.id)
   const isLoading = ref(false)
+  const fatchingData = ref(false)
 
   const emailRule = (value: string) => {
     return /.+@.+\..+/.test(value) || 'Invalid email'
@@ -84,7 +104,14 @@
   })
 
   const fetchContact = async (id: string) => {
-    console.log(id)
+    fatchingData.value = true
+    try {
+      contact.value = await getContactById(id)
+    } catch (error) {
+      router.push('/contact-list')
+      toast.error('Failed to fetch contact.')
+    }
+    fatchingData.value = false
   }
 
   const submitForm = async () => {

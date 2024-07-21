@@ -19,3 +19,13 @@ export const addNewContact = async (contact: Contact): Promise<void> => {
     throw error
   }
 }
+
+export const getContactById = async (id: string): Promise<Contact> => {
+  try {
+    const response = await api.get(`/users/${id}`)
+    return response.data
+  } catch (error) {
+    console.error(`Error fetching contact with ID ${id}:`, error)
+    throw error
+  }
+}

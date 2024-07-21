@@ -15,7 +15,8 @@
         </v-col>
         <v-spacer />
         <v-col class="d-flex align-center justify-end">
-          <v-btn :to="{name: 'add-contact-view'}">
+          <v-btn color="primary" :to="{ name: 'add-contact-view' }">
+            <v-icon left>mdi-plus</v-icon>
             Add New Contact
           </v-btn>
         </v-col>
@@ -68,7 +69,7 @@
                 </v-icon>
                 <div>
                   <v-card-text class="text-h6">
-                    {{ contacts.length ? 'No result was found :)': ' No Data' }}
+                    {{ contacts.length ? 'No results were found :)' : 'No data' }}
                   </v-card-text>
                 </div>
               </v-card>
