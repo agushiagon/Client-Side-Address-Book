@@ -85,6 +85,7 @@
   import { onMounted, ref } from 'vue'
   import { Contact } from '@/types/index'
   import { fetchData } from '@/api/index'
+  import { useToast } from 'vue-toastification'
 
   const headers = [
     { title: 'First Name', value: 'firstName' },
@@ -94,10 +95,11 @@
   ]
 
   const contacts = ref<Contact[]>([])
-
+  const toast = useToast()
   const search = ref<string>('')
 
   onMounted(async () => {
+    toast.success("I'm a toast!")
     await fetchData()
   })
 
