@@ -1,6 +1,7 @@
 export interface Contact {
-    firstName: string;
-    lastName: string;
-    email: string;
-    country: string;
-  }
+  id?: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  country: string;
+}

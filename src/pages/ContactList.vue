@@ -42,8 +42,15 @@
                 <td class="text-left">
                   {{ props.item.email }}
                 </td>
-                <td class="text-left">
+                <td class="d-flex align-center justify-space-between">
                   {{ props.item.country }}
+                  <v-btn
+                    icon
+                    :to="{name: 'edit-contact-view', params: { id: props.item.id }}"
+                    variant="plain"
+                  >
+                    <v-icon>mdi-pencil</v-icon>
+                  </v-btn>
                 </td>
               </tr>
             </template>

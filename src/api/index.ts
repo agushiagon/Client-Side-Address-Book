@@ -11,10 +11,9 @@ export const fetchContacts = async (): Promise<Contact[]> => {
   }
 }
 
-export const addNewContact = async (contact: Contact): Promise<Contact> => {
+export const addNewContact = async (contact: Contact): Promise<void> => {
   try {
-    const response = await api.post('/users', contact)
-    return response.data
+    await api.post('/users', contact)
   } catch (error) {
     console.error('Error adding contact:', error)
     throw error

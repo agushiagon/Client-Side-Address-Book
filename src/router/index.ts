@@ -21,7 +21,7 @@ const router = createRouter({
     },
     {
       path: '/edit-contact/:id',
-      name: 'hadd-contact-view',
+      name: 'edit-contact-view',
       component: () => import('@/pages/ContactForm.vue'),
       meta: {
         pageTitle: 'Edit Contact',
