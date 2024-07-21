@@ -1,5 +1,7 @@
 # Client-Side-Address-Book 
 
+This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/).
+
 ## 💿 Install
 
 Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
@@ -49,10 +51,6 @@ yarn build
 (Repeat for npm, pnpm, and bun with respective commands.)
 
 Once the build process is completed, your application will be ready for deployment in a production environment.
-
-## 💪 Support Vuetify Development
-
-This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/).
 
 ## 📑 License
 [MIT](http://opensource.org/licenses/MIT)
