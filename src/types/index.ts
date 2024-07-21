@@ -5,3 +5,11 @@ export interface Contact {
   email: string;
   country: string;
 }
+
+export interface BreadcrumbItem {
+  title: string;
+  disabled?: boolean;
+  to?: {
+    name: string;
+  };
+}

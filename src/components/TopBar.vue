@@ -12,7 +12,7 @@
       <span class="font-weight-bold text-subtitle-1">
         {{ $route.meta.pageTitle }}
       </span>
-      <v-breadcrumbs class="text-subtitle-2" :items="$route.meta.breadcrumbs">
+      <v-breadcrumbs class="text-subtitle-2" :items="breadcrumbs">
         <template #title="{ item }">
           <v-breadcrumbs-item
             color="primary"
@@ -27,7 +27,14 @@
 </template>
 
 <script setup lang="ts">
+  import { computed } from 'vue'
+  import { useRoute } from 'vue-router'
+  import { BreadcrumbItem } from '@/types/index'
+  const route = useRoute()
 
+  const breadcrumbs = computed<BreadcrumbItem[]>(() => {
+    return route.meta.breadcrumbs as BreadcrumbItem[]
+  })
 </script>
 <style lang="scss" scoped>
 </style>
