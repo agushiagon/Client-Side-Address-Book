@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": "883c",
+      "firstName": "Agon",
+      "lastName": "Agushi",
+      "email": "agon@agushi.test",
+      "country": "Albania"
+    },
+    {
+      "id": "ac12",
+      "firstName": "Test",
+      "lastName": "Test",
+      "email": "test@test.test",
+      "country": "United Arab Emirates"
+    }
+  ]
+}

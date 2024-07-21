@@ -4,11 +4,11 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/home',
-      name: 'home-view',
-      component: () => import('@/pages/Home.vue'),
+      path: '/contact-list',
+      name: 'contact-list-view',
+      component: () => import('@/pages/ContactList.vue'),
       meta: {
-        pageTitle: 'Home',
+        pageTitle: 'Contact List',
       },
     },
     {
@@ -21,13 +21,13 @@ const router = createRouter({
     },
     {
       path: '/edit-contact/:id',
-      name: 'hadd-contact-view',
+      name: 'edit-contact-view',
       component: () => import('@/pages/ContactForm.vue'),
       meta: {
         pageTitle: 'Edit Contact',
       },
     },
-    { path: '/', redirect: '/home' },
+    { path: '/', redirect: '/contact-list' },
   ],
 })
 

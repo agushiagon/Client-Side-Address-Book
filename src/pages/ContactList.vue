@@ -15,7 +15,8 @@
         </v-col>
         <v-spacer />
         <v-col class="d-flex align-center justify-end">
-          <v-btn :to="{name: 'add-contact-view'}">
+          <v-btn color="primary" :to="{ name: 'add-contact-view' }">
+            <v-icon left>mdi-plus</v-icon>
             Add New Contact
           </v-btn>
         </v-col>
@@ -28,6 +29,7 @@
             hide-default-footer
             item-key="email"
             :items="contacts"
+            :loading="loadingData"
             :search="search"
           >
             <template #item="props">
@@ -41,16 +43,22 @@
                 <td class="text-left">
                   {{ props.item.email }}
                 </td>
-                <td class="text-left">
+                <td class="d-flex align-center justify-space-between">
                   {{ props.item.country }}
+                  <v-btn
+                    icon
+                    :to="{name: 'edit-contact-view', params: { id: props.item.id }}"
+                    variant="plain"
+                  >
+                    <v-icon>mdi-pencil</v-icon>
+                  </v-btn>
                 </td>
               </tr>
             </template>
             <template #no-data>
               <v-card
-                class="d-flex align-center py-8"
+                class="d-flex justify-center align-center py-8"
                 flat
-                tile
               >
                 <v-icon
                   class="pa-3"
@@ -59,17 +67,17 @@
                 >
                   mdi-information-outline
                 </v-icon>
-                <div class="ma-3">
-                  <v-card-text class="text-h6 text-left primary--text pa-0">
-                    No Data
+                <div>
+                  <v-card-text class="text-h6">
+                    {{ contacts.length ? 'No results were found :)' : 'No data' }}
                   </v-card-text>
                 </div>
               </v-card>
             </template>
             <template #loading>
               <v-skeleton-loader
-                height="400px"
-                type="table-row-divider@9"
+                height="300px"
+                type="table-row-divider@5"
               />
             </template>
           </v-data-table>
@@ -82,8 +90,10 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { onMounted, ref } from 'vue'
   import { Contact } from '@/types/index'
+  import { fetchContacts } from '@/api/index'
+  import { useToast } from 'vue-toastification'
 
   const headers = [
     { title: 'First Name', value: 'firstName' },
@@ -92,12 +102,24 @@
     { title: 'Country', value: 'country' },
   ]
 
-  const contacts = ref<Contact[]>([
-    { firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', country: 'USA' },
-    { firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', country: 'Canada' },
-  ])
-
+  const contacts = ref<Contact[]>([])
+  const toast = useToast()
+  const loadingData = ref(false)
   const search = ref<string>('')
+
+  onMounted(async () => {
+    loadingData.value = true
+    await loadData()
+    loadingData.value = false
+  })
+
+  const loadData = async () => {
+    try {
+      contacts.value = await fetchContacts()
+    } catch (error) {
+      toast.error('Failed to fetch data')
+    }
+  }
 
 </script>
 
