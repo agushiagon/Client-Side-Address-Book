@@ -112,11 +112,11 @@
   const addContact = async () => {
     await addNewContact(contact.value)
     toast.success('Contact added successfully')
-    router.push('/home')
+    router.push('/contact-list')
   }
 
   const updateContact = async () => {
     console.log('update')
-    router.push('/home')
+    router.push('/contact-list')
   }
 </script>
