@@ -28,6 +28,7 @@
             hide-default-footer
             item-key="email"
             :items="contacts"
+            :loading="loadingData"
             :search="search"
           >
             <template #item="props">
@@ -48,9 +49,8 @@
             </template>
             <template #no-data>
               <v-card
-                class="d-flex align-center py-8"
+                class="d-flex justify-center align-center py-8"
                 flat
-                tile
               >
                 <v-icon
                   class="pa-3"
@@ -59,17 +59,17 @@
                 >
                   mdi-information-outline
                 </v-icon>
-                <div class="ma-3">
-                  <v-card-text class="text-h6 text-left primary--text pa-0">
-                    No Data
+                <div>
+                  <v-card-text class="text-h6">
+                    {{ contacts.length ? 'No result was found :)': ' No Data' }}
                   </v-card-text>
                 </div>
               </v-card>
             </template>
             <template #loading>
               <v-skeleton-loader
-                height="400px"
-                type="table-row-divider@9"
+                height="300px"
+                type="table-row-divider@5"
               />
             </template>
           </v-data-table>
@@ -84,7 +84,7 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue'
   import { Contact } from '@/types/index'
-  import { fetchData } from '@/api/index'
+  import { fetchContacts } from '@/api/index'
   import { useToast } from 'vue-toastification'
 
   const headers = [
@@ -96,12 +96,22 @@
 
   const contacts = ref<Contact[]>([])
   const toast = useToast()
+  const loadingData = ref(false)
   const search = ref<string>('')
 
   onMounted(async () => {
-    toast.success("I'm a toast!")
-    await fetchData()
+    loadingData.value = true
+    await loadData()
+    loadingData.value = false
   })
+
+  const loadData = async () => {
+    try {
+      contacts.value = await fetchContacts()
+    } catch (error) {
+      toast.error('Failed to fetch data')
+    }
+  }
 
 </script>
 

@@ -1,18 +1,11 @@
 {
   "users": [
     {
-      "id": 1,
-      "firstName": "John",
-      "lastName": "Doe",
-      "email": "john.doe@example.com",
-      "country": "USA"
-    },
-    {
-      "id": 2,
-      "firstName": "John",
-      "lastName": "Doe",
-      "email": "john.doe@example.com",
-      "country": "USA"
+      "id": "e5f3",
+      "firstName": "Agon",
+      "lastName": "Agushi",
+      "email": "agon@test.com",
+      "country": "Albania"
     }
   ]
 }
