@@ -40,6 +40,12 @@ To run the mock API, use the following command:
 The server will be accessible at [http://localhost:3001](http://localhost:3001)
 Keep in mind that the data will only be stored locally.
 
+### Tests
+
+To run playwright tests, use the following command:
+
+`npm run test:e2e`
+
 ### Building for Production
 
 To build your project for production, use:
