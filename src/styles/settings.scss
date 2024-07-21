@@ -2,3 +2,8 @@
 // @use 'vuetify/settings' with (
 //   $color-pack: false
 // );
+
+.v-breadcrumbs {
+  justify-content: center;
+  padding: 0;
+}

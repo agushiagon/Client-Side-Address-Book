@@ -12,6 +12,16 @@
       <span class="font-weight-bold text-subtitle-1">
         {{ $route.meta.pageTitle }}
       </span>
+      <v-breadcrumbs class="text-subtitle-2" :items="$route.meta.breadcrumbs">
+        <template #title="{ item }">
+          <v-breadcrumbs-item
+            color="primary"
+            density="compact"
+            :title="item.title"
+            :to="item.to"
+          />
+        </template>
+      </v-breadcrumbs>
     </v-app-bar-title>
   </v-app-bar>
 </template>
